@@ -54,6 +54,8 @@ def convert_word_to_char_conll(conll_chunk):
         dis = 0
         if head_li[i] == 0:
             res_li.append((word[-1], 0, label_li[i]))
+        elif head_li[i] == -1:
+            res_li.append((word[-1], -1, label_li[i]))  # 考虑到数据集仅部分标注的情况
         elif i + 1 < head_li[i]:
             for k in range(i+1, head_li[i]):  # 计算两个词的结尾字符之间相距多少个字
                 dis += word_len_li[k]
@@ -66,7 +68,7 @@ def convert_word_to_char_conll(conll_chunk):
     res_str = ""
     for i, res in enumerate(res_li):
         assert i+1 != res[1]
-        assert 0 <= res[1] <= len(res_li)
+        assert -1 <= res[1] <= len(res_li)
         res_str += f"{i+1}\t{res[0]}\t_\t_\t_\t_\t{res[1]}\t{res[2]}\t_\t_\n"
     res_str += "\n"
     return res_str
