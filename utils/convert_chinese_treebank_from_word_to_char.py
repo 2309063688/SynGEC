@@ -25,7 +25,7 @@ def is_chinese_char(cp):
 
 def is_chinese_word(word):
     for char in word:
-        if not is_chinese_char(char):
+        if not is_chinese_char(ord(char)):
             return False
     return True
 
@@ -41,7 +41,7 @@ def convert_word_to_char_conll(conll_chunk):
         label_li.append(meta_info[7])
     char_li = []
     for word in word_li:
-        if is_chinese_word:
+        if is_chinese_word(word):
             char_li.append([char for char in word])
         else:
             char_li.append([word])
