@@ -40,14 +40,14 @@ python -m torch.distributed.launch --nproc_per_node=8 --master_port=10000 \
 
 # Step 5. Predict source-side trees for GEC training
 CoNLL_SUFFIX=conll_predict_gopar
-IN_FILE=../../data/hsk+lang8_train/src.txt.char
+IN_FILE=../../data/hsk+lang8_train/src.txt
 OUT_FILE=$IN_FILE.${CoNLL_SUFFIX}
-CUDA_VISIBLE_DEVICES=0 nohup python ../../src/src_gopar/parse.py $IN_FILE $OUT_FILE $gopar_path/model &
+CUDA_VISIBLE_DEVICES=0 nohup python ../../src/src_gopar/parse.py $IN_FILE".char" $OUT_FILE $gopar_path/model &
 
-IN_FILE=../../data/mucgec_dev/src.txt.char
+IN_FILE=../../data/mucgec_dev/src.txt
 OUT_FILE=$IN_FILE.${CoNLL_SUFFIX}
-CUDA_VISIBLE_DEVICES=0 nohup python ../../src/src_gopar/parse.py $IN_FILE $OUT_FILE $gopar_path/model &
+CUDA_VISIBLE_DEVICES=0 nohup python ../../src/src_gopar/parse.py $IN_FILE".char" $OUT_FILE $gopar_path/model &
 
-IN_FILE=../../data/mucgec_test/src.txt.char
+IN_FILE=../../data/mucgec_test/src.txt
 OUT_FILE=$IN_FILE.${CoNLL_SUFFIX}
-CUDA_VISIBLE_DEVICES=0 nohup python ../../src/src_gopar/parse.py $IN_FILE $OUT_FILE $gopar_path/model &
+CUDA_VISIBLE_DEVICES=0 nohup python ../../src/src_gopar/parse.py $IN_FILE".char" $OUT_FILE $gopar_path/model &
